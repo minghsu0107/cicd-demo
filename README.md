@@ -1,5 +1,4 @@
 # CI/CD Demo
-[![Build Status](https://drone.pdlab.csie.ntu.edu.tw/api/badges/minghsu0107/cicd-demo/status.svg)](https://drone.pdlab.csie.ntu.edu.tw/minghsu0107/cicd-demo)
 
 This is a tutorial of building CI/CD pipeline with DroneCI and ArgoCD. In this demo, we use DroneCI for running tests, publishing new images, and update image tags in the manifest repository. We then use ArgoCD for continuous delivery, synchronizing application states in the Kubernetes cluster with manifests maintained in the Git repository. This way of doing Kubernetes cluster management and application delivery is kown as GitOps. By applying GitOps, we can maintain a 'source of truth' for both the application code and infrastructure, improving system reliability and efficiency for your team.
 
