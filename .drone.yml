@@ -63,3 +63,5 @@ steps:
   - kustomize edit set image minghsu0107/cicd-demo:$DRONE_COMMIT_SHA
   - git add . && git commit -m "update to $DRONE_COMMIT_SHA"
   - git push https://$GIT_USERNAME:$GIT_PASSWORD@github.com/minghsu0107/cicd-demo-manifests.git
+  depends_on:
+    - build-image
