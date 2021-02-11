@@ -1,0 +1,49 @@
+kind: pipeline
+type: docker
+name: add-server-ci
+
+platform:
+  os: linux
+  arch: amd64
+
+x-build-docker-image: &x-build-docker-image
+  image: plugins/docker
+  settings:
+    custom_labels:
+    - 'BUILD_NUMBER=${DRONE_BUILD_NUMBER}'
+    - 'BUILD_SHA=${DRONE_COMMIT_SHA}'
+    tags:
+      - ${DRONE_COMMIT_SHA}
+      - latest
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+
+trigger:
+  branch:
+  - main
+  event:
+    include:
+    - push
+    - pull_request
+
+steps:
+- name: test
+  pull: if-not-exists
+  image: golang:1.15.2
+  commands:
+  - cd src
+  - go mod download
+  - go test -v ./...
+
+- name: build-image
+  <<: *x-build-docker-image
+  settings:
+    repo:
+      from_secret: repo
+    dockerfile: src/Dockerfile
+    context: src
+  depends_on:
+    - test
+    
