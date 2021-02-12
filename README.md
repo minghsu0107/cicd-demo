@@ -17,7 +17,7 @@ This is a tutorial of building CI/CD pipeline with DroneCI and ArgoCD. In this d
 ### Setup
 After you have connected your Github account with Drone, you can browse all your repositories on Drone dashboard. Next, clone this repo, activate it and navigate to `Repositories -> cicd-demo -> settings` to add the following secrets:
 
-![](https://i.imgur.com/CXj88J8.png)
+![](https://i.imgur.com/pkxf7xI.png)
 
 - `docker_username`: your Dockerhub account
 - `docker_password`: your Dockerhub password
