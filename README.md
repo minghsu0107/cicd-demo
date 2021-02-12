@@ -48,7 +48,7 @@ Credentials can be configured using Argo CD CLI:
 ```bash
 argocd repo add <repo-url> --username <username> --password <password>
 ```
-Or you can configure via UI. Navigate to `Settings/Repositories`; click Connect Repo using HTTPS button and enter credentials:
+Or you can configure via UI. Navigate to `Settings/Repositories`; click `Connect Repo using HTTPS` and enter credentials:
 
 ![](https://i.imgur.com/UAyNkte.png)
 
