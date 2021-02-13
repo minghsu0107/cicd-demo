@@ -6,7 +6,7 @@ This way of doing Kubernetes cluster management and application delivery is kown
 
 Architecture overview:
 
-![](https://i.imgur.com/ZQgn4TO.png)
+![](https://i.imgur.com/FygPEyK.png)
 ## Prerequisites
 1. A Drone server
     - [Github installation](https://docs.drone.io/server/provider/github/)
