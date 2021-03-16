@@ -48,20 +48,14 @@ steps:
   pull: if-not-exists
   image: line/kubectl-kustomize:1.20.2-3.9.1
   environment:
-    GIT_EMAIL:
-      from_secret: git_email
-    GIT_USERNAME:
-      from_secret: git_username
-    GIT_PASSWORD:
-      from_secret: git_password
+    SSH_KEY:
+      from_secret: ssh_key
   commands:
   - apk update && apk add git
-  - git config user.email "$GIT_EMAIL"
-  - git config user.name "$GIT_USERNAME"
-  - rm -rf cicd-demo-manifests && git clone https://$GIT_USERNAME:$GIT_PASSWORD@github.com/minghsu0107/cicd-demo-manifests.git
-  - cd cicd-demo-manifests/production
-  - kustomize edit set image minghsu0107/cicd-demo:$DRONE_COMMIT_SHA
+  - echo $SSH_KEY > ~/.ssh/id_rsa
+  - rm -rf cicd-demo-manifests && git clone ssh://git@github.com/minghsu0107/cicd-demo-manifests.git
+  - cd cicd-demo-manifests/production && kustomize edit set image minghsu0107/cicd-demo:$DRONE_COMMIT_SHA
   - git add . && git commit -m "update to $DRONE_COMMIT_SHA"
-  - git push https://$GIT_USERNAME:$GIT_PASSWORD@github.com/minghsu0107/cicd-demo-manifests.git
+  - git push ssh://git@github.com/minghsu0107/cicd-demo-manifests.git
   depends_on:
     - build-image
