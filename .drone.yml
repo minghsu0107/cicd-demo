@@ -52,7 +52,7 @@ steps:
       from_secret: ssh_key
   commands:
   - apk update && apk add --no-cache git && apk add --no-cache openssh
-  - mkdir -p ~/.ssh && echo $SSH_KEY > ~/.ssh/id_rsa && cat ~/.ssh/id_rsa
+  - mkdir -p ~/.ssh && echo $SSH_KEY > ~/.ssh/id_rsa && chmod 700 ~/.ssh/id_rsa && ssh-keyscan github.com >> ~/.ssh/known_hosts
   - rm -rf cicd-demo-manifests && git clone ssh://git@github.com/minghsu0107/cicd-demo-manifests.git
   - cd cicd-demo-manifests/production && kustomize edit set image minghsu0107/cicd-demo:$DRONE_COMMIT_SHA
   - git add . && git commit -m "update to $DRONE_COMMIT_SHA"
