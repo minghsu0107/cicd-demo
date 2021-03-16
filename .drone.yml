@@ -51,7 +51,7 @@ steps:
     SSH_KEY:
       from_secret: ssh_key
   commands:
-  - apk update && apk add git
+  - apk update && apk add --no-cache git && apk add --no-cache openssh
   - mkdir -p ~/.ssh && echo $SSH_KEY > ~/.ssh/id_rsa
   - rm -rf cicd-demo-manifests && git clone ssh://git@github.com/minghsu0107/cicd-demo-manifests.git
   - cd cicd-demo-manifests/production && kustomize edit set image minghsu0107/cicd-demo:$DRONE_COMMIT_SHA
