@@ -23,13 +23,13 @@ Architecture overview:
 ### Setup
 After you have connected your Github account with Drone, you can browse all your repositories on Drone dashboard. Next, clone this repo, activate it and navigate to `Repositories -> cicd-demo -> settings` to add the following secrets:
 
-![](https://i.imgur.com/pkxf7xI.png)
+<img width="1041" alt="image" src="https://user-images.githubusercontent.com/50090692/111301242-f04c2e80-868c-11eb-9945-c2de30b0ee92.png">
 
 - `docker_username`: your Dockerhub account
 - `docker_password`: your Dockerhub password
-- `git_email`: your email
-- `git_username`: your Github account
-- `git_password`: your Github password
+- `ssh_key`: base64-encoded RSA private key for accessing Github
+
+To access Github using SSH, you should first upload a RSA public key, such as `~/.ssh/id_rsa.pub`, to Github. Then, you could generate base64-encoded RSA private key by running `cat ~/.ssh/id_rsa | base64`.
 
 Finally, replace `minghsu0107` with your Github and Dockerhub account in `.drone.yml`. Now any push or pull request will trigger a Drone pipeline. You can check details via `your repo -> setting -> webhook` on Github.
 ### Local Development
