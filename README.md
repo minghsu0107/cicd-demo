@@ -32,6 +32,7 @@ After you have connected your Github account with Drone, you can browse all your
 To access Github using SSH, you should first upload a RSA public key, such as `~/.ssh/id_rsa.pub`, to Github. Then, you could generate base64-encoded RSA private key by running `cat ~/.ssh/id_rsa | base64`.
 
 Finally, replace `minghsu0107` with your Github and Dockerhub account in `.drone.yml`. Now any push or pull request will trigger a Drone pipeline. You can check details via `your repo -> setting -> webhook` on Github.
+
 ### Local Development
 For local development, you will not want to push every change to your repo just for testing whether `.drone.yml` works. Instead, you can use [Drone CLI](https://docs.drone.io/cli/install/) to execute pipeline locally.
 
