@@ -46,16 +46,18 @@ steps:
     - test
 - name: update-manifests
   pull: if-not-exists
-  image: line/kubectl-kustomize:1.20.2-3.9.1
+  image: minghsu0107/update-kustomization:v1.0.3
   environment:
     SSH_KEY:
       from_secret: ssh_key
-  commands:
-  - apk update && apk add --no-cache git && apk add --no-cache openssh
-  - mkdir -p ~/.ssh && echo $SSH_KEY | base64 -d > ~/.ssh/id_rsa && chmod 700 ~/.ssh/id_rsa && ssh-keyscan github.com >> ~/.ssh/known_hosts
-  - rm -rf cicd-demo-manifests && git clone ssh://git@github.com/minghsu0107/cicd-demo-manifests.git
-  - cd cicd-demo-manifests/production && kustomize edit set image minghsu0107/cicd-demo:$DRONE_COMMIT_SHA
-  - git add . && git commit -m "update to $DRONE_COMMIT_SHA"
-  - git push ssh://git@github.com/minghsu0107/cicd-demo-manifests.git
+    IMAGES: minghsu0107/cicd-demo
+    IMAGE_TAG: ${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}
+    MANIFEST_HOST: github.com
+    MANIFEST_USER: minghsu0107
+    MANIFEST_REPO: cicd-demo-manifests
+    MANIFEST_BRANCH: ${DRONE_COMMIT_BRANCH}
+    KUSTOMIZATION: production
   depends_on:
     - build-image
+  when:
+    event: push
