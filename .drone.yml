@@ -46,7 +46,7 @@ steps:
     - test
 - name: update-manifests
   pull: if-not-exists
-  image: minghsu0107/update-kustomization:v1.0.3
+  image: minghsu0107/update-kustomization:v1.0.4
   environment:
     SSH_KEY:
       from_secret: ssh_key
@@ -55,7 +55,7 @@ steps:
     MANIFEST_HOST: github.com
     MANIFEST_USER: minghsu0107
     MANIFEST_REPO: cicd-demo-manifests
-    MANIFEST_BRANCH: ${DRONE_COMMIT_BRANCH}
+    MANIFEST_BRANCH: main
     KUSTOMIZATION: production
   depends_on:
     - build-image
