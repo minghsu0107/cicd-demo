@@ -1,4 +1,5 @@
 # CI/CD Demo
+
 **This is the demo repo for [my blog post](https://minghsu0107.github.io/posts/droneci-argocd/)**.
 
 This tutorial shows how to build CI/CD pipeline with DroneCI and ArgoCD. In this demo, we use DroneCI for running tests, publishing new images, and update image tags in the manifest repository. We then use ArgoCD for continuous delivery, synchronizing application states in the Kubernetes cluster with manifests maintained in the Git repository. 
